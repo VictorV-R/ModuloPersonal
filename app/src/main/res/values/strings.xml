@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Modulo Personal</string>
+    <string name="nombre">Nombre:</string>
+    <string name="codigo">Codigo:</string>
+    <string name="est_reg">Estado de Registro</string>
+    <string name="save_reg">Guardar Registro</string>
+    <string name="insertar">Insertar Registro</string>
+    <string name="editar">Editar Registro</string>
+    <string name="paises">Paises</string>
+    <string name="cargo">Cargo</string>
+    <string name="codigoEstReg">Codigo:</string>
+    <string name="seleccioneEstReg">Seleccione Estado de Registro</string>
+    <string name="seleccionar">Seleccionar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="cargos">Cargos</string>
+    <string name="dni">DNI:</string>
+    <string name="date_format">yyyy-MM-dd</string>
+    <string name="pais">Pais:</string>
+    <string name="personal">Personal</string>
+</resources>

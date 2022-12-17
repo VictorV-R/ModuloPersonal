@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication"
+        tools:targetApi="31">
+        <activity
+            android:name=".PersonalDetail"
+            android:exported="false"
+            android:parentActivityName=".PersonalLista">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PersonalLista" />
+        </activity>
+        <activity
+            android:name=".PersonalEditar"
+            android:exported="false"
+            android:parentActivityName=".PersonalLista">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PersonalLista" />
+        </activity>
+        <activity
+            android:name=".PersonalInsert"
+            android:exported="false"
+            android:parentActivityName=".PersonalLista">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PersonalLista" />
+        </activity>
+        <activity
+            android:name=".CargoEditar"
+            android:exported="false"
+            android:parentActivityName=".CargoLista">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CargoLista" />
+        </activity>
+        <activity
+            android:name=".CargoInsert"
+            android:exported="false"
+            android:parentActivityName=".CargoLista">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CargoLista" />
+        </activity>
+        <activity
+            android:name=".CargoDetail"
+            android:exported="false"
+            android:parentActivityName=".CargoLista">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CargoLista" />
+        </activity>
+        <activity
+            android:name=".CargoLista"
+            android:exported="false"
+            android:parentActivityName=".PersonalLista">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PersonalLista" />
+        </activity>
+        <activity
+            android:name=".EstRegSelect"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".PaisEditar"
+            android:exported="false"
+            android:parentActivityName=".PaisLista">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PaisLista" />
+        </activity>
+        <activity
+            android:name=".PaisDetail"
+            android:exported="false"
+            android:parentActivityName=".PaisLista">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PaisLista" />
+        </activity>
+        <activity
+            android:name=".PaisInsert"
+            android:exported="false"
+            android:parentActivityName=".PaisLista">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PaisLista" />
+        </activity>
+        <activity
+            android:name=".PaisLista"
+            android:exported="false"
+            android:parentActivityName=".PersonalLista">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PersonalLista" />
+        </activity>
+        <activity
+            android:name=".EstRegLista"
+            android:exported="false"
+            android:parentActivityName=".PersonalLista">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PersonalLista" />
+        </activity>
+        <activity
+            android:name=".EstRegDetail"
+            android:exported="false"
+            android:parentActivityName=".EstRegLista">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EstRegLista" />
+        </activity>
+        <activity
+            android:name=".EstRegEditar"
+            android:exported="false"
+            android:parentActivityName=".EstRegLista">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EstRegLista" />
+        </activity>
+        <activity
+            android:name=".EstRegInsert"
+            android:exported="false"
+            android:parentActivityName=".EstRegLista">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EstRegLista" />
+        </activity>
+        <activity
+            android:name=".PersonalLista"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+    </application>
+
+</manifest>

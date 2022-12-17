@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/cargo"
+        android:title="@string/cargo" />
+    <item
+        android:id="@+id/paises"
+        android:title="@string/paises" />
+    <item
+        android:id="@+id/estReg"
+        android:title="@string/est_reg" />
+
+</menu>
