@@ -21,9 +21,10 @@ import java.util.ArrayList;
 public class ListaEstRegAdapter extends RecyclerView.Adapter<ListaEstRegAdapter.EstRegHolder> {
 
     ArrayList<EstReg> listaEstRegs;
-
-    public ListaEstRegAdapter(ArrayList<EstReg> listaEstRegs){
+    Context context;
+    public ListaEstRegAdapter(ArrayList<EstReg> listaEstRegs,Context context){
         this.listaEstRegs = listaEstRegs;
+        this.context=context;
     }
 
     @NonNull

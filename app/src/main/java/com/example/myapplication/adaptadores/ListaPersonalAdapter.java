@@ -13,6 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.PersonalDetail;
 import com.example.myapplication.R;
+import com.example.myapplication.db.DbCargo;
+import com.example.myapplication.db.DbEstReg;
+import com.example.myapplication.db.DbPais;
+import com.example.myapplication.entidades.Cargo;
+import com.example.myapplication.entidades.EstReg;
+import com.example.myapplication.entidades.Pais;
 import com.example.myapplication.entidades.Personal;
 
 import java.util.ArrayList;
@@ -21,9 +27,10 @@ public class ListaPersonalAdapter extends RecyclerView.Adapter<ListaPersonalAdap
 
     ArrayList<Personal> listaPersonal;
     String tabla = "Personal";
-
-    public ListaPersonalAdapter(ArrayList<Personal> listaPersonal){
+Context context;
+    public ListaPersonalAdapter(ArrayList<Personal> listaPersonal,Context context){
         this.listaPersonal = listaPersonal;
+        this.context=context;
     }
 
     @NonNull
@@ -35,13 +42,21 @@ public class ListaPersonalAdapter extends RecyclerView.Adapter<ListaPersonalAdap
 
     @Override
     public void onBindViewHolder(@NonNull ListaPersonalAdapter.PersonalHolder holder, int position) {
+        DbPais dbPais = new DbPais(this.context);
+        DbCargo dbCargo= new DbCargo(this.context);
+        DbEstReg dbEstReg =new DbEstReg(this.context);
+
+        Cargo cargo = dbCargo.verCargo(listaPersonal.get(position).getPerCodCar());
+        Pais pais = dbPais.verPais(listaPersonal.get(position).getPerCodPai());
+        EstReg estReg = dbEstReg.verEstReg(listaPersonal.get(position).getPerEstReg());
+
         holder.viewCodPersonal.setText(String.valueOf(listaPersonal.get(position).getPerCod()));
         holder.viewNomPersonal.setText(listaPersonal.get(position).getPerNom());
         holder.viewDniPersonal.setText(String.valueOf(listaPersonal.get(position).getPerDni()));
         holder.viewFecPersonal.setText(listaPersonal.get(position).getPerFecNac());
-        holder.viewCarPersonal.setText(String.valueOf(listaPersonal.get(position).getPerCodCar()));
-        holder.viewPaiPersonal.setText(String.valueOf(listaPersonal.get(position).getPerCodPai()));
-        holder.viewEstPersonal.setText(listaPersonal.get(position).getPerEstReg());
+        holder.viewCarPersonal.setText(cargo.getNombre() );
+        holder.viewPaiPersonal.setText(pais.getNombre());
+        holder.viewEstPersonal.setText(estReg.getNombre());
 
     }
 

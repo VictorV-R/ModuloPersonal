@@ -25,7 +25,7 @@ public class PaisLista extends AppCompatActivity {
         listaPaises.setLayoutManager(new LinearLayoutManager(this));
         DbPais dbPais = new DbPais(PaisLista.this);
 
-        ListaPaisAdapter adapter = new ListaPaisAdapter(dbPais.mostrarPaises());
+        ListaPaisAdapter adapter = new ListaPaisAdapter(dbPais.mostrarPaises(),getApplicationContext());
         listaPaises.setAdapter(adapter);
 
         btnInsertarPais = findViewById(R.id.btnInsertar);

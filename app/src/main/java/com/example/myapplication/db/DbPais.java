@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
 
+import com.example.myapplication.entidades.EstReg;
 import com.example.myapplication.entidades.Pais;
 
 import java.util.ArrayList;
@@ -96,4 +97,6 @@ public class DbPais extends DbHelper {
         }
         return correcto;
     }
+
+
 }

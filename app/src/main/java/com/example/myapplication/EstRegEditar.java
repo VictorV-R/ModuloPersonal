@@ -59,6 +59,7 @@ public class EstRegEditar extends AppCompatActivity {
                 if(correcto){
                     Toast.makeText(EstRegEditar.this, "Registro Modificado", Toast.LENGTH_LONG).show();
                     verRegistro();
+                    onNavigateUp();
                 }
                 else
                     Toast.makeText(EstRegEditar.this, "Error al Modificar Registro", Toast.LENGTH_LONG).show();

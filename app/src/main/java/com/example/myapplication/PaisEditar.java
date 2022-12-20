@@ -78,6 +78,8 @@ public class PaisEditar extends AppCompatActivity {
                 if(correcto){
                     Toast.makeText(PaisEditar.this, "Registro Modificado", Toast.LENGTH_LONG).show();
                     verRegistro();
+                    onNavigateUp();
+
                 }
                 else
                     Toast.makeText(PaisEditar.this, "Error al Modificar Registro", Toast.LENGTH_LONG).show();

@@ -29,6 +29,7 @@ public class CargoInsert extends AppCompatActivity {
             if (id > 0){
                 Toast.makeText(CargoInsert.this, "Registro Guardado", Toast.LENGTH_LONG).show();
                 limpiar();
+                onNavigateUp();
             } else
                 Toast.makeText(CargoInsert.this, "Error al Guardar Registro", Toast.LENGTH_LONG).show();
         });

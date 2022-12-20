@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.CargoDetail;
 import com.example.myapplication.R;
+import com.example.myapplication.db.DbEstReg;
 import com.example.myapplication.entidades.Cargo;
+import com.example.myapplication.entidades.EstReg;
 
 import java.util.ArrayList;
 
@@ -20,9 +22,10 @@ public class ListaCargoAdapter extends RecyclerView.Adapter<ListaCargoAdapter.Ca
 
     ArrayList<Cargo> listaCargo;
     String tabla = "Cargo";
-
-    public ListaCargoAdapter(ArrayList<Cargo> listaCargo){
+    Context context;
+    public ListaCargoAdapter(ArrayList<Cargo> listaCargo,Context context){
         this.listaCargo = listaCargo;
+        this.context= context;
     }
 
     @NonNull
@@ -34,9 +37,12 @@ public class ListaCargoAdapter extends RecyclerView.Adapter<ListaCargoAdapter.Ca
 
     @Override
     public void onBindViewHolder(@NonNull ListaCargoAdapter.CargoHolder holder, int position) {
+        DbEstReg dbEstReg = new DbEstReg(this.context);
+        EstReg estReg = dbEstReg.verEstReg(listaCargo.get(position).getEstReg());
+
         holder.viewCodigoCargo.setText(String.valueOf(listaCargo.get(position).getCodigo()));
         holder.viewNombreCargo.setText(listaCargo.get(position).getNombre());
-        holder.viewEstRegCargo.setText(listaCargo.get(position).getEstReg());
+        holder.viewEstRegCargo.setText(estReg.getNombre());
     }
 
     @Override

@@ -24,7 +24,7 @@ public class CargoLista extends AppCompatActivity {
         listaCargos.setLayoutManager(new LinearLayoutManager(this));
         DbCargo dbCargo = new DbCargo(CargoLista.this);
 
-        ListaCargoAdapter adapter = new ListaCargoAdapter(dbCargo.mostrarCargos());
+        ListaCargoAdapter adapter = new ListaCargoAdapter(dbCargo.mostrarCargos(),getApplicationContext());
         listaCargos.setAdapter(adapter);
 
         btnInsertarCargo = findViewById(R.id.btnInsertar);

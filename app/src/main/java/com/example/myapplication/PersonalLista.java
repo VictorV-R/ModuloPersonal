@@ -30,7 +30,7 @@ public class PersonalLista extends AppCompatActivity {
         listaPersonal.setLayoutManager(new LinearLayoutManager(this));
         DbPersonal dbPersonal = new DbPersonal(PersonalLista.this);
 
-        ListaPersonalAdapter adapter = new ListaPersonalAdapter(dbPersonal.mostrarPersonal());
+        ListaPersonalAdapter adapter = new ListaPersonalAdapter(dbPersonal.mostrarPersonal(),getApplicationContext());
         listaPersonal.setAdapter(adapter);
 
         btnInsertar = findViewById(R.id.btnInsertar);
