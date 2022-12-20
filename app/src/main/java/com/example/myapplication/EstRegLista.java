@@ -25,7 +25,7 @@ public class EstRegLista extends AppCompatActivity {
         listaEstReg.setLayoutManager(new LinearLayoutManager(this));
         DbEstReg dbEstReg = new DbEstReg(EstRegLista.this);
 
-        ListaEstRegAdapter adapter = new ListaEstRegAdapter(dbEstReg.mostrarEstRegs());
+        ListaEstRegAdapter adapter = new ListaEstRegAdapter(dbEstReg.mostrarEstRegs(),getApplicationContext());
         listaEstReg.setAdapter(adapter);
 
         btnInsertarEstReg = findViewById(R.id.btnInsertar);

@@ -77,6 +77,8 @@ public class PersonalEditar extends AppCompatActivity {
                 if(correcto){
                     Toast.makeText(PersonalEditar.this, "Registro Modificado", Toast.LENGTH_LONG).show();
                     verRegistro();
+                    onNavigateUp();
+
                 }
                 else
                     Toast.makeText(PersonalEditar.this, "Error al Modificar Registro", Toast.LENGTH_LONG).show();

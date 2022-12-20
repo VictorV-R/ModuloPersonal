@@ -30,6 +30,7 @@ public class EstRegInsert extends AppCompatActivity {
             if (id > 0){
                 Toast.makeText(EstRegInsert.this, "Registro Guardado", Toast.LENGTH_LONG).show();
                 limpiar();
+                onNavigateUp();
             } else
                 Toast.makeText(EstRegInsert.this, "Error al Guardar Registro", Toast.LENGTH_LONG).show();
         });

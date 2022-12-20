@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.PaisDetail;
 import com.example.myapplication.R;
+import com.example.myapplication.db.DbEstReg;
+import com.example.myapplication.db.DbPais;
+import com.example.myapplication.entidades.EstReg;
 import com.example.myapplication.entidades.Pais;
 
 import java.util.ArrayList;
@@ -20,9 +23,11 @@ public class ListaPaisAdapter extends RecyclerView.Adapter<ListaPaisAdapter.Pais
 
     ArrayList<Pais> listaPaises;
     String tabla = "Pais";
+    Context context;
 
-    public ListaPaisAdapter(ArrayList<Pais> listaPaises) {
+    public ListaPaisAdapter(ArrayList<Pais> listaPaises, Context context) {
         this.listaPaises = listaPaises;
+        this.context = context;
     }
 
     @NonNull
@@ -34,9 +39,11 @@ public class ListaPaisAdapter extends RecyclerView.Adapter<ListaPaisAdapter.Pais
 
     @Override
     public void onBindViewHolder(@NonNull ListaPaisAdapter.PaisHolder holder, int position) {
+        DbEstReg dbEstReg = new DbEstReg(this.context);
+        EstReg estReg   = dbEstReg.verEstReg( listaPaises.get(position).getEstReg() );
         holder.viewCodigoPai.setText(String.valueOf(listaPaises.get(position).getCodigo()));
         holder.viewNombre.setText(listaPaises.get(position).getNombre());
-        holder.viewEstReg.setText(listaPaises.get(position).getEstReg());
+        holder.viewEstReg.setText(estReg.getNombre());
     }
 
     @Override

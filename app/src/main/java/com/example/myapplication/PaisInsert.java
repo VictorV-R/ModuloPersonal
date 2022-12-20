@@ -29,6 +29,7 @@ public class PaisInsert extends AppCompatActivity {
             if (id > 0){
                 Toast.makeText(PaisInsert.this, "Registro Guardado", Toast.LENGTH_LONG).show();
                 limpiar();
+                onNavigateUp();
             } else
                 Toast.makeText(PaisInsert.this, "Error al Guardar Registro", Toast.LENGTH_LONG).show();
         });

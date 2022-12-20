@@ -1,10 +1,13 @@
 package com.example.myapplication;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,17 +18,23 @@ import com.example.myapplication.db.DbPersonal;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class PersonalInsert extends AppCompatActivity {
 
     EditText txtNombre, txtDni, txtFecNac, txtCargo, txtPais, txtEstReg;
     Button btnGuardar;
     Date date;
+    private int day, month, year;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Locale.setDefault(Locale.ENGLISH);
+
         setContentView(R.layout.activity_personal_insert);
 
         txtNombre = findViewById(R.id.txtNombrePersonal);
@@ -36,22 +45,24 @@ public class PersonalInsert extends AppCompatActivity {
         txtEstReg = findViewById(R.id.txtEstRegPersonal);
         btnGuardar = findViewById(R.id.btnGuardar);
 
-        txtFecNac.setInputType(InputType.TYPE_NULL);
-        txtFecNac.setOnClickListener(view -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setView(R.layout.datepicker_layout);
-            AlertDialog alertDialog = builder.show();
-            CalendarView calendarView = alertDialog.findViewById(R.id.calendarView);
-            calendarView.setOnDateChangeListener((calendarView1, i, i1, i2) -> {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    date = simpleDateFormat.parse(i + "-" + i1 + "-" + i2);
-                    txtFecNac.setText(simpleDateFormat.format(date));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                    date = null;
+        txtFecNac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                day = c.get(Calendar.DAY_OF_MONTH);
+                month = c.get(Calendar.MONTH);
+                year = c.get(Calendar.YEAR);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(view.getContext(),new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        txtFecNac.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    }
                 }
-            });
+                        , year, month, day);
+
+                datePickerDialog.show();
+            }
         });
 
         btnGuardar.setOnClickListener(view -> {
@@ -61,6 +72,7 @@ public class PersonalInsert extends AppCompatActivity {
             if (id > 0){
                 Toast.makeText(PersonalInsert.this, "Registro Guardado", Toast.LENGTH_LONG).show();
                 limpiar();
+                onNavigateUp();
             } else
                 Toast.makeText(PersonalInsert.this, "Error al Guardar Registro", Toast.LENGTH_LONG).show();
         });

@@ -77,6 +77,7 @@ public class CargoEditar extends AppCompatActivity {
                 if(correcto){
                     Toast.makeText(CargoEditar.this, "Registro Modificado", Toast.LENGTH_LONG).show();
                     verRegistro();
+                    onNavigateUp();
                 }
                 else
                     Toast.makeText(CargoEditar.this, "Error al Modificar Registro", Toast.LENGTH_LONG).show();
