@@ -2,10 +2,13 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +23,7 @@ public class PersonalLista extends AppCompatActivity {
 
     RecyclerView listaPersonal;
     Button btnInsertar;
+    EditText edt_nombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,25 @@ public class PersonalLista extends AppCompatActivity {
         btnInsertar.setOnClickListener(view -> {
             Intent intent = new Intent(PersonalLista.this, PersonalInsert.class);
             startActivity(intent);
+        });
+
+        edt_nombre = findViewById(R.id.edt_nombre);
+        edt_nombre.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                ListaPersonalAdapter adapter = new ListaPersonalAdapter(dbPersonal.filtrarPersonal(editable.toString()),getApplicationContext());
+                listaPersonal.setAdapter(adapter);
+            }
         });
 
     }

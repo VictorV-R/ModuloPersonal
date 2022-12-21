@@ -2,12 +2,16 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.adaptadores.ListaEstRegAdapter;
 import com.example.myapplication.adaptadores.ListaPaisAdapter;
 import com.example.myapplication.db.DbPais;
 
@@ -15,6 +19,7 @@ public class PaisLista extends AppCompatActivity {
 
     RecyclerView listaPaises;
     Button btnInsertarPais;
+    EditText edt_nombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,26 @@ public class PaisLista extends AppCompatActivity {
         btnInsertarPais.setOnClickListener(view -> {
             Intent intent = new Intent(PaisLista.this, PaisInsert.class);
             startActivity(intent);
+        });
+
+        edt_nombre = findViewById(R.id.edt_nombre);
+        edt_nombre.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                ListaPaisAdapter adapter = new ListaPaisAdapter(dbPais.filtrarPais(editable.toString()),getApplicationContext());
+                listaPaises.setAdapter(adapter);
+
+            }
         });
     }
 }

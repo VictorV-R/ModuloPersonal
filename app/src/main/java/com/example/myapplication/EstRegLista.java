@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.myapplication.adaptadores.ListaEstRegAdapter;
 import com.example.myapplication.db.DbEstReg;
@@ -15,6 +18,7 @@ public class EstRegLista extends AppCompatActivity {
 
     RecyclerView listaEstReg;
     Button btnInsertarEstReg;
+    EditText edt_nombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,25 @@ public class EstRegLista extends AppCompatActivity {
 
         ListaEstRegAdapter adapter = new ListaEstRegAdapter(dbEstReg.mostrarEstRegs(),getApplicationContext());
         listaEstReg.setAdapter(adapter);
+
+        edt_nombre = findViewById(R.id.edt_nombre);
+        edt_nombre.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                ListaEstRegAdapter adapter = new ListaEstRegAdapter(dbEstReg.filtrarEstReg(editable.toString()),getApplicationContext());
+                listaEstReg.setAdapter(adapter);
+            }
+        });
 
         btnInsertarEstReg = findViewById(R.id.btnInsertar);
         btnInsertarEstReg.setOnClickListener(view -> {

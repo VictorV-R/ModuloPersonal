@@ -9,6 +9,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.myapplication.entidades.Cargo;
+import com.example.myapplication.entidades.EstReg;
 
 import java.util.ArrayList;
 
@@ -48,8 +49,9 @@ public class DbCargo extends DbHelper{
         ArrayList<Cargo> listCargos = new ArrayList<>();
         Cargo cargo;
         Cursor cursorCargo;
+        String codigo = "*";
 
-        cursorCargo = db.rawQuery("SELECT * FROM " + TABLE_CARGO, null);
+        cursorCargo = db.rawQuery("SELECT * FROM " + TABLE_CARGO + " WHERE CarEstReg NOT LIKE '" + codigo + "'", null);
 
         if(cursorCargo.moveToFirst()){
             do{
@@ -94,6 +96,46 @@ public class DbCargo extends DbHelper{
             correcto = true;
         } catch (Exception e) {
             Log.e("Error:", String.valueOf(e));
+            correcto = false;
+        }
+        return correcto;
+    }
+
+    public ArrayList<Cargo> filtrarCargos(String str){
+        DbHelper dbHelper = new DbHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ArrayList<Cargo> listCargos = new ArrayList<>();
+        Cargo cargo;
+        Cursor cursorCargo;
+
+        cursorCargo = db.rawQuery("SELECT * FROM " + TABLE_CARGO + " WHERE CarNom LIKE  '%" + str + "%'", null);
+
+        if(cursorCargo.moveToFirst()){
+            do{
+                cargo = new Cargo();
+                cargo.setCodigo(cursorCargo.getInt(0));
+                cargo.setNombre(cursorCargo.getString(1));
+                cargo.setEstReg(cursorCargo.getString(2));
+                listCargos.add(cargo);
+            } while (cursorCargo.moveToNext());
+        }
+
+        cursorCargo.close();
+        return listCargos;
+    }
+
+    public boolean operationCargo(int codigo, String estReg){
+
+        boolean correcto;
+
+        DbHelper dbHelper = new DbHelper(context);
+
+        try (SQLiteDatabase db = dbHelper.getWritableDatabase()) {
+            db.execSQL("UPDATE "+ TABLE_CARGO +" SET CarEstReg = '" + estReg + "' WHERE CarCod = '" + codigo+ "'");
+            correcto = true;
+        } catch (Exception e) {
+            System.out.print("Error: " + e);
             correcto = false;
         }
         return correcto;

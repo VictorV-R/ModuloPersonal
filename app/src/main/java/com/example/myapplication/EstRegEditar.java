@@ -16,7 +16,7 @@ import com.example.myapplication.entidades.EstReg;
 public class EstRegEditar extends AppCompatActivity {
 
     EditText txtNombre, txtEstReg, txtCodigo;
-    Button btnGuardarEstReg, btnEditar;
+    Button btnGuardar, btnCancelar;
 
     EstReg estRegs;
     String codigo = "";
@@ -25,13 +25,13 @@ public class EstRegEditar extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_est_reg_detail);
+        setContentView(R.layout.activity_est_reg_editar);
 
-        txtCodigo = findViewById(R.id.txtCodigoEstReg);
-        txtNombre = findViewById(R.id.txtNombrePais);
-        txtEstReg = findViewById(R.id.txtEstRegPais);
-        btnEditar = findViewById(R.id.btnEditar);
-        btnGuardarEstReg = findViewById(R.id.btnGuardar);
+        txtCodigo = findViewById(R.id.edt_estRegCode);
+        txtNombre = findViewById(R.id.edt_nombreEstReg);
+        txtEstReg = findViewById(R.id.edt_estRegEstReg);
+        btnGuardar = findViewById(R.id.btnGuardar);
+        btnCancelar = findViewById(R.id.btnCancelar);
 
         if(savedInstanceState == null){
             Bundle extras = getIntent().getExtras();
@@ -49,11 +49,10 @@ public class EstRegEditar extends AppCompatActivity {
             txtCodigo.setText(estRegs.getCodigo());
             txtNombre.setText(estRegs.getNombre());
             txtEstReg.setText(estRegs.getEstado_registro());
-            btnEditar.setVisibility(View.INVISIBLE);
             txtCodigo.setInputType(InputType.TYPE_NULL);
         }
 
-        btnGuardarEstReg.setOnClickListener(view -> {
+        btnGuardar.setOnClickListener(view -> {
             if (!txtNombre.getText().toString().equals("") && !txtEstReg.getText().toString().equals("")){
                 correcto = dbEstReg.editarEstReg(codigo, txtNombre.getText().toString(), txtEstReg.getText().toString());
                 if(correcto){
@@ -66,10 +65,15 @@ public class EstRegEditar extends AppCompatActivity {
             } else
                 Toast.makeText(EstRegEditar.this, "Debe llenar los campos obligatorios", Toast.LENGTH_LONG).show();
         });
+
+        btnCancelar.setOnClickListener(view -> {
+            onNavigateUp();
+        });
     }
     private void verRegistro(){
         Intent intent = new Intent(this, EstRegDetail.class);
         intent.putExtra("ID", codigo);
         startActivity(intent);
     }
+
 }

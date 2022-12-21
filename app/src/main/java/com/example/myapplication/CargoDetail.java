@@ -1,13 +1,15 @@
 package com.example.myapplication;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.myapplication.db.DbCargo;
 import com.example.myapplication.entidades.Cargo;
@@ -15,7 +17,7 @@ import com.example.myapplication.entidades.Cargo;
 public class CargoDetail extends AppCompatActivity {
 
     EditText txtNombreCargo, txtCodigoCargo, txtEstRegCargo;
-    Button btnGuardar, btnEditar;
+    Button btnEditar, btnEliminar, btnActivar, btnInactivar;
 
     Cargo cargo;
     int codigo = 0;
@@ -26,11 +28,13 @@ public class CargoDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cargo_detail);
 
-        txtCodigoCargo = findViewById(R.id.txtCodigoCargo);
-        txtNombreCargo = findViewById(R.id.txtNombreCargo);
-        txtEstRegCargo = findViewById(R.id.txtEstRegCargo);
-        btnGuardar = findViewById(R.id.btnGuardar);
+        txtCodigoCargo = findViewById(R.id.edt_codeCargo);
+        txtNombreCargo = findViewById(R.id.edt_nombreCargo);
+        txtEstRegCargo = findViewById(R.id.edt_estRegCargo);
         btnEditar = findViewById(R.id.btnEditar);
+        btnEliminar = findViewById(R.id.btnEliminar);
+        btnActivar = findViewById(R.id.btnActivar);
+        btnInactivar = findViewById(R.id.btnInactivar);
 
         if(savedInstanceState == null){
             Bundle extras = getIntent().getExtras();
@@ -57,7 +61,6 @@ public class CargoDetail extends AppCompatActivity {
             txtCodigoCargo.setText(String.valueOf(cargo.getCodigo()));
             txtNombreCargo.setText(cargo.getNombre());
             txtEstRegCargo.setText(cargo.getEstReg());
-            btnGuardar.setVisibility(View.INVISIBLE);
             txtCodigoCargo.setInputType(InputType.TYPE_NULL);
             txtNombreCargo.setInputType(InputType.TYPE_NULL);
             txtEstRegCargo.setInputType(InputType.TYPE_NULL);
@@ -70,5 +73,55 @@ public class CargoDetail extends AppCompatActivity {
             intent.putExtra("Tabla", tabla);
             startActivity(intent);
         });
+
+        btnEliminar.setOnClickListener(view -> {
+            loadAlert();
+        });
+
+        btnActivar.setOnClickListener(view -> {
+            dbCargo.operationCargo(codigo, "A");
+            loadActivityCargo();
+        });
+
+        btnInactivar.setOnClickListener(view -> {
+            dbCargo.operationCargo(codigo, "I");
+            loadActivityCargo();
+        });
+    }
+
+    public void loadAlert(){
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+        dialogo1.setTitle("Importante");
+        dialogo1.setMessage("¿ Esta seguro de eliminar el registro de cargo ?");
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                aceptar();
+            }
+        });
+        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                cancelar();
+            }
+        });
+        dialogo1.show();
+    }
+    public void aceptar() {
+        DbCargo dbCargo = new DbCargo(CargoDetail.this);
+        dbCargo.operationCargo(codigo, "*");
+
+        Toast t=Toast.makeText(this,"Eliminacion exitosa.", Toast.LENGTH_SHORT);
+        t.show();
+
+        loadActivityCargo();
+    }
+
+    public void cancelar() {
+        finish();
+    }
+
+    public void loadActivityCargo(){
+        Intent intent = new Intent(this, CargoLista.class);
+        startActivity(intent);
     }
 }

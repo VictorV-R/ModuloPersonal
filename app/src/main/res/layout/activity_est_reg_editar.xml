@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PersonalInsert">
+    tools:context=".EstRegDetail">
 
     <TextView
         android:id="@+id/title"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:text="Crear Personal"
+        android:text="Editar Estado de Registro"
         android:textColor="@color/black"
         android:textSize="30dp"
         android:textStyle="bold"
@@ -22,98 +22,68 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txtNombrePersonal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:ems="10"
-        android:hint="@string/nombre"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:textColorHint="#78909C"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/txtCargoPersonal"
+        android:id="@+id/edt_estRegCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="@string/cargo"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:labelFor="@+id/viewNombreEstReg"
         android:textColorHint="#78909C"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtFecPersonal" />
+        app:layout_constraintTop_toBottomOf="@+id/viewCodigoEstReg" />
 
     <EditText
-        android:id="@+id/txtPaisPersonal"
+        android:id="@+id/edt_nombreEstReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="@string/pais"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:labelFor="@+id/viewNombreEstReg"
         android:textColorHint="#78909C"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCargoPersonal" />
+        app:layout_constraintTop_toBottomOf="@+id/viewNomPais" />
 
     <EditText
-        android:id="@+id/txtDniPersonal"
+        android:id="@+id/edt_estRegEstReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="@string/dni"
-        android:importantForAutofill="no"
-        android:inputType="number|text"
-        android:textColorHint="#78909C"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNombrePersonal" />
-
-    <EditText
-        android:id="@+id/txtEstRegPersonal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:hint="@string/est_reg"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:labelFor="@id/viewEstRegPais"
         android:textColorHint="#78909C"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPaisPersonal" />
+        app:layout_constraintTop_toBottomOf="@+id/viewEstRegPais" />
 
     <Button
         android:id="@+id/btnGuardar"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
         android:gravity="center_horizontal"
         android:text="@string/save_reg"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEstRegPersonal" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_estRegEstReg" />
 
     <Button
         android:id="@+id/btnCancelar"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:gravity="center_horizontal"
         android:text="@string/cancelar"
         android:textSize="18sp"
@@ -122,20 +92,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnGuardar" />
 
-    <EditText
-        android:id="@+id/txtFecPersonal"
+
+    <TextView
+        android:id="@+id/viewNomPais"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="65dp"
         android:layout_marginTop="10dp"
-        android:ems="10"
-        android:focusable="false"
-        android:hint="@string/date_format"
-        android:importantForAutofill="no"
-        android:inputType="date"
-        android:textColorHint="#78909C"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/nombre"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDniPersonal" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_estRegCode" />
+
+    <TextView
+        android:id="@+id/viewCodigoEstReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/codigo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/viewEstRegPais"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/est_reg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_nombreEstReg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

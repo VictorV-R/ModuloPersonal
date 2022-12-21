@@ -16,7 +16,7 @@ import com.example.myapplication.entidades.Cargo;
 public class CargoEditar extends AppCompatActivity {
 
     EditText txtNombreCargo, txtCodigoCargo, txtEstRegCargo;
-    Button btnGuardar, btnEditar;
+    Button btnGuardar, btnCancelar;
 
     Cargo cargo;
     int codigo = 0;
@@ -26,13 +26,13 @@ public class CargoEditar extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cargo_detail);
+        setContentView(R.layout.activity_cargo_editar);
 
-        txtCodigoCargo = findViewById(R.id.txtCodigoCargo);
-        txtNombreCargo = findViewById(R.id.txtNombreCargo);
-        txtEstRegCargo = findViewById(R.id.txtEstRegCargo);
+        txtCodigoCargo = findViewById(R.id.edt_codeCargo);
+        txtNombreCargo = findViewById(R.id.edt_nombreCargo);
+        txtEstRegCargo = findViewById(R.id.edt_estRegCargo);
         btnGuardar = findViewById(R.id.btnGuardar);
-        btnEditar = findViewById(R.id.btnEditar);
+        btnCancelar = findViewById(R.id.btnCancelar);
 
         if(savedInstanceState == null){
             Bundle extras = getIntent().getExtras();
@@ -59,7 +59,6 @@ public class CargoEditar extends AppCompatActivity {
             txtCodigoCargo.setText(String.valueOf(cargo.getCodigo()));
             txtNombreCargo.setText(cargo.getNombre());
             txtEstRegCargo.setText(codigoEstReg);
-            btnEditar.setVisibility(View.INVISIBLE);
             txtCodigoCargo.setInputType(InputType.TYPE_NULL);
             txtEstRegCargo.setInputType(InputType.TYPE_NULL);
         }
@@ -84,6 +83,11 @@ public class CargoEditar extends AppCompatActivity {
             } else
                 Toast.makeText(CargoEditar.this, "Debe llenar los campos obligatorios", Toast.LENGTH_LONG).show();
         });
+
+        btnCancelar.setOnClickListener(view -> {
+            onNavigateUp();
+        });
+
     }
     private void verRegistro(){
         Intent intent = new Intent(this, CargoDetail.class);

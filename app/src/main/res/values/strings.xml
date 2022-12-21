@@ -3,9 +3,9 @@
     <string name="nombre">Nombre:</string>
     <string name="codigo">Codigo:</string>
     <string name="est_reg">Estado de Registro</string>
-    <string name="save_reg">Guardar Registro</string>
+    <string name="save_reg">Guardar</string>
     <string name="insertar">Insertar Registro</string>
-    <string name="editar">Editar Registro</string>
+    <string name="editar">Editar</string>
     <string name="paises">Paises</string>
     <string name="cargo">Cargo</string>
     <string name="codigoEstReg">Codigo:</string>
@@ -17,4 +17,8 @@
     <string name="date_format">yyyy-MM-dd</string>
     <string name="pais">Pais:</string>
     <string name="personal">Personal</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="activar">Activar</string>
+    <string name="inactivar">Inactivar</string>
+
 </resources>

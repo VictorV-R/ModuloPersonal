@@ -19,8 +19,8 @@ public class CargoInsert extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cargo_insert);
 
-        txtNombre = findViewById(R.id.txtNombreCargo);
-        txtEstReg = findViewById(R.id.txtEstRegCargo);
+        txtNombre = findViewById(R.id.edt_nombreCargo);
+        txtEstReg = findViewById(R.id.edt_estRegCargo);
         btnGuardar = findViewById(R.id.btnGuardar);
 
         btnGuardar.setOnClickListener(view -> {
@@ -32,10 +32,12 @@ public class CargoInsert extends AppCompatActivity {
                 onNavigateUp();
             } else
                 Toast.makeText(CargoInsert.this, "Error al Guardar Registro", Toast.LENGTH_LONG).show();
+
         });
     }
     private void limpiar(){
         txtEstReg.setText("");
         txtNombre.setText("");
     }
+
 }

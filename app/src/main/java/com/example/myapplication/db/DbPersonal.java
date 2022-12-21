@@ -55,8 +55,9 @@ public class DbPersonal extends DbHelper{
         ArrayList<Personal> listaPersonal = new ArrayList<>();
         Personal personal;
         Cursor cursorPersonal;
+        String codigo = "*";
 
-        cursorPersonal = db.rawQuery("SELECT * FROM " + TABLE_PERSONAL, null);
+        cursorPersonal = db.rawQuery("SELECT * FROM " + TABLE_PERSONAL + " WHERE PerEstReg NOT LIKE '" + codigo + "'", null);
 
         if(cursorPersonal.moveToFirst()){
             do{
@@ -124,7 +125,7 @@ public class DbPersonal extends DbHelper{
         return correcto;
     }
 
-    public boolean editarPersonal(int codigo, String nombre, String estReg){
+    public boolean editarPersonal(int codigo, String nombre, Integer dni, String estReg){
 
         boolean correcto;
 
@@ -133,6 +134,7 @@ public class DbPersonal extends DbHelper{
         try (SQLiteDatabase db = dbHelper.getWritableDatabase()) {
             db.execSQL("UPDATE "+ TABLE_PERSONAL +" SET " +
                     "PerNom = '" + nombre +
+                    "PerDni = '" + dni +
                     "' , PerEstReg = '" + estReg +
                     "' WHERE PerCod = '" + codigo + "'");
             correcto = true;
@@ -142,6 +144,50 @@ public class DbPersonal extends DbHelper{
         }
 
         dbHelper.close();
+        return correcto;
+    }
+
+    public ArrayList<Personal> filtrarPersonal(String str) {
+        DbHelper dbHelper = new DbHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ArrayList<Personal> listaPersonal = new ArrayList<>();
+        Personal personal;
+        Cursor cursorPersonal;
+
+        cursorPersonal = db.rawQuery("SELECT * FROM " + TABLE_PERSONAL + " WHERE PerNom LIKE  '%" + str + "%'", null);
+
+        if(cursorPersonal.moveToFirst()){
+            do{
+                personal = new Personal();
+                personal.setPerCod(cursorPersonal.getInt(0));
+                personal.setPerNom(cursorPersonal.getString(1));
+                personal.setPerDni(cursorPersonal.getInt(2));
+                personal.setPerFecNac((cursorPersonal.getString(3)));
+                personal.setPerCodCar(cursorPersonal.getInt(4));
+                personal.setPerCodPai(cursorPersonal.getInt(5));
+                personal.setPerEstReg(cursorPersonal.getString(6));
+                listaPersonal.add(personal);
+            } while (cursorPersonal.moveToNext());
+        }
+        cursorPersonal.close();
+        return listaPersonal;
+    }
+
+    public boolean operationPersonal(int codigo, String estReg){
+
+        boolean correcto;
+
+        DbHelper dbHelper = new DbHelper(context);
+
+        try (SQLiteDatabase db = dbHelper.getWritableDatabase()) {
+            db.execSQL("UPDATE "+ TABLE_PERSONAL +" SET PerEstReg = '" + estReg +
+                    "' WHERE PerCod = '" + codigo + "'");
+            correcto = true;
+        } catch (Exception e) {
+            System.out.print("Error: " + e);
+            correcto = false;
+        }
         return correcto;
     }
 }

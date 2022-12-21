@@ -15,8 +15,8 @@ import com.example.myapplication.entidades.Personal;
 
 public class PersonalEditar extends AppCompatActivity {
 
-    EditText txtNombrePersonal, txtCodigoPersonal, txtEstRegPersonal;
-    Button btnGuardar, btnEditar;
+    EditText txtNombrePersonal, txtCodigoPersonal, txtEstRegPersonal, txtDniPersonal;
+    Button btnGuardar, btnCancelar;
 
     Personal personal;
     int codigo = 0;
@@ -26,13 +26,14 @@ public class PersonalEditar extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personal_detail);
+        setContentView(R.layout.activity_personal_editar);
 
-        txtCodigoPersonal = findViewById(R.id.txtCodigoPersonal);
-        txtNombrePersonal = findViewById(R.id.txtNombrePersonal);
-        txtEstRegPersonal = findViewById(R.id.txtEstRegPersonal);
+        txtCodigoPersonal = findViewById(R.id.edt_codigoPersonal);
+        txtNombrePersonal = findViewById(R.id.edt_nombrePersonal);
+        txtDniPersonal = findViewById(R.id.edt_dniPersonal);
+        txtEstRegPersonal = findViewById(R.id.edt_estRegPersonal);
         btnGuardar = findViewById(R.id.btnGuardar);
-        btnEditar = findViewById(R.id.btnEditar);
+        btnCancelar = findViewById(R.id.btnCancelar);
 
         if(savedInstanceState == null){
             Bundle extras = getIntent().getExtras();
@@ -58,8 +59,8 @@ public class PersonalEditar extends AppCompatActivity {
         if(personal != null){
             txtCodigoPersonal.setText(String.valueOf(personal.getPerCod()));
             txtNombrePersonal.setText(personal.getPerNom());
+            txtDniPersonal.setText(personal.getPerDni());
             txtEstRegPersonal.setText(codigoEstReg);
-            btnEditar.setVisibility(View.INVISIBLE);
             txtCodigoPersonal.setInputType(InputType.TYPE_NULL);
             txtEstRegPersonal.setInputType(InputType.TYPE_NULL);
         }
@@ -73,7 +74,7 @@ public class PersonalEditar extends AppCompatActivity {
 
         btnGuardar.setOnClickListener(view -> {
             if (!txtNombrePersonal.getText().toString().equals("") && !txtEstRegPersonal.getText().toString().equals("")){
-                correcto = dbPersonal.editarPersonal(codigo, txtNombrePersonal.getText().toString(), txtEstRegPersonal.getText().toString());
+                correcto = dbPersonal.editarPersonal(codigo, txtNombrePersonal.getText().toString(), Integer.parseInt(txtDniPersonal.getText().toString()), txtEstRegPersonal.getText().toString());
                 if(correcto){
                     Toast.makeText(PersonalEditar.this, "Registro Modificado", Toast.LENGTH_LONG).show();
                     verRegistro();
@@ -84,6 +85,10 @@ public class PersonalEditar extends AppCompatActivity {
                     Toast.makeText(PersonalEditar.this, "Error al Modificar Registro", Toast.LENGTH_LONG).show();
             } else
                 Toast.makeText(PersonalEditar.this, "Debe llenar los campos obligatorios", Toast.LENGTH_LONG).show();
+        });
+
+        btnCancelar.setOnClickListener(view -> {
+            onNavigateUp();
         });
     }
     private void verRegistro(){

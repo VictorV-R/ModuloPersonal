@@ -19,9 +19,9 @@ public class EstRegInsert extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_est_reg_insert);
 
-        txtCodigo = findViewById(R.id.txtCodigoEstReg);
-        txtNombre = findViewById(R.id.txtNombrePais);
-        txtEstReg = findViewById(R.id.txtEstRegPais);
+        txtCodigo = findViewById(R.id.edt_codeCargo);
+        txtNombre = findViewById(R.id.edt_nombreCargo);
+        txtEstReg = findViewById(R.id.edt_estRegCargo);
         btnGuardar = findViewById(R.id.btnGuardar);
 
         btnGuardar.setOnClickListener( view -> {

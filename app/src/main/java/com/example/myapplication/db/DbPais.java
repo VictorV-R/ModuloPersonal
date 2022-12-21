@@ -46,8 +46,9 @@ public class DbPais extends DbHelper {
         ArrayList<Pais> listaPaises = new ArrayList<>();
         Pais pais;
         Cursor cursorPais;
+        String codigo = "*";
 
-        cursorPais = db.rawQuery("SELECT * FROM " + TABLE_PAISES, null);
+        cursorPais = db.rawQuery("SELECT * FROM " + TABLE_PAISES + " WHERE PaiEstReg NOT LIKE '" + codigo + "'", null);
 
         if(cursorPais.moveToFirst()){
             do{
@@ -98,5 +99,43 @@ public class DbPais extends DbHelper {
         return correcto;
     }
 
+    public ArrayList<Pais> filtrarPais(String str){
+        DbHelper dbHelper = new DbHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ArrayList<Pais> listaPaises = new ArrayList<>();
+        Pais pais;
+        Cursor cursorPais;
+
+        cursorPais = db.rawQuery("SELECT * FROM " + TABLE_PAISES + " WHERE PaiNom LIKE  '%" + str + "%'", null);
+
+        if(cursorPais.moveToFirst()){
+            do{
+                pais = new Pais();
+                pais.setCodigo(cursorPais.getInt(0));
+                pais.setNombre(cursorPais.getString(1));
+                pais.setEstReg(cursorPais.getString(2));
+                listaPaises.add(pais);
+            } while (cursorPais.moveToNext());
+        }
+        cursorPais.close();
+        return listaPaises;
+    }
+
+    public boolean operationPais(int codigo, String estReg){
+
+        boolean correcto;
+
+        DbHelper dbHelper = new DbHelper(context);
+
+        try (SQLiteDatabase db = dbHelper.getWritableDatabase()) {
+            db.execSQL("UPDATE "+ TABLE_PAISES +" SET PaiEstReg = '" + estReg + "' WHERE PaiCod = '" + codigo+ "'");
+            correcto = true;
+        } catch (Exception e) {
+            System.out.print("Error: " + e);
+            correcto = false;
+        }
+        return correcto;
+    }
 
 }

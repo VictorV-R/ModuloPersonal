@@ -19,8 +19,8 @@ public class PaisInsert extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pais_insert);
 
-        txtEstReg = findViewById(R.id.txtEstRegPais);
-        txtNombre = findViewById(R.id.txtNombrePais);
+        txtEstReg = findViewById(R.id.edt_estRegCargo);
+        txtNombre = findViewById(R.id.edt_nombreCargo);
         btnGuardar = findViewById(R.id.btnGuardar);
 
         btnGuardar.setOnClickListener(view -> {

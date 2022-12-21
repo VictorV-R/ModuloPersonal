@@ -70,6 +70,10 @@ public class EstRegSelect extends AppCompatActivity {
                     Log.i("Q","No entro");
             }
         });
+
+        btnCancelar.setOnClickListener(view -> {
+
+        });
     }
 
     public void editarPais(ListaEstRegSelectAdapter adapter, int codigo){

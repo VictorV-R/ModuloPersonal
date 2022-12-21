@@ -1,12 +1,14 @@
 package com.example.myapplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.db.DbPais;
@@ -15,7 +17,7 @@ import com.example.myapplication.entidades.Pais;
 public class PaisDetail extends AppCompatActivity {
 
     EditText txtNombrePais, txtCodigoPais, txtEstRegPais;
-    Button btnGuardar, btnEditar;
+    Button btnEditar, btnEliminar, btnActivar, btnInactivar;
 
     Pais pais;
     int codigo = 0;
@@ -27,10 +29,12 @@ public class PaisDetail extends AppCompatActivity {
         setContentView(R.layout.activity_pais_detail);
 
         txtCodigoPais = findViewById(R.id.txtCodigoPais);
-        txtNombrePais = findViewById(R.id.txtNombrePais);
-        txtEstRegPais = findViewById(R.id.txtEstRegPais);
-        btnGuardar = findViewById(R.id.btnGuardar);
+        txtNombrePais = findViewById(R.id.edt_nombreCargo);
+        txtEstRegPais = findViewById(R.id.edt_estRegCargo);
         btnEditar = findViewById(R.id.btnEditar);
+        btnEliminar = findViewById(R.id.btnEliminar);
+        btnActivar = findViewById(R.id.btnActivar);
+        btnInactivar = findViewById(R.id.btnInactivar);
 
         if(savedInstanceState == null){
             Bundle extras = getIntent().getExtras();
@@ -57,7 +61,6 @@ public class PaisDetail extends AppCompatActivity {
             txtCodigoPais.setText(String.valueOf(pais.getCodigo()));
             txtNombrePais.setText(pais.getNombre());
             txtEstRegPais.setText(pais.getEstReg());
-            btnGuardar.setVisibility(View.INVISIBLE);
             txtCodigoPais.setInputType(InputType.TYPE_NULL);
             txtNombrePais.setInputType(InputType.TYPE_NULL);
             txtEstRegPais.setInputType(InputType.TYPE_NULL);
@@ -70,5 +73,58 @@ public class PaisDetail extends AppCompatActivity {
             intent.putExtra("Tabla", tabla);
             startActivity(intent);
         });
+
+        btnEliminar.setOnClickListener(view -> {
+            loadAlert();
+        });
+
+        btnActivar.setOnClickListener(view -> {
+            dbPais.operationPais(codigo, "*");
+            loadActivityPais();
+        });
+
+        btnInactivar.setOnClickListener(view -> {
+            dbPais.operationPais(codigo, "I");
+            loadActivityPais();
+        });
     }
+
+
+    public void loadAlert(){
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+        dialogo1.setTitle("Importante");
+        dialogo1.setMessage("¿ Esta seguro de eliminar el registro de estado ?");
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                aceptar();
+            }
+        });
+        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                cancelar();
+            }
+        });
+        dialogo1.show();
+    }
+    public void aceptar() {
+        DbPais dbPais = new DbPais(PaisDetail.this);
+        pais = dbPais.verPais(codigo);
+        dbPais.operationPais(codigo, "*");
+
+        Toast t=Toast.makeText(this,"Eliminacion exitosa.", Toast.LENGTH_SHORT);
+        t.show();
+
+        loadActivityPais();
+    }
+
+    public void cancelar() {
+        finish();
+    }
+
+    public void loadActivityPais(){
+        Intent intent = new Intent(this, PaisLista.class);
+        startActivity(intent);
+    }
+
 }

@@ -47,8 +47,9 @@ public class DbEstReg extends DbHelper{
         ArrayList<EstReg> listaEstRegs = new ArrayList<>();
         EstReg estRegs;
         Cursor cursorEstRegs;
+        String codigo = "*";
 
-        cursorEstRegs = db.rawQuery("SELECT * FROM " + TABLE_ESTREG, null);
+        cursorEstRegs = db.rawQuery("SELECT * FROM " + TABLE_ESTREG + " WHERE EstRegEstReg NOT LIKE '" + codigo + "'", null);
 
         if(cursorEstRegs.moveToFirst()){
             do{
@@ -124,4 +125,45 @@ public class DbEstReg extends DbHelper{
         }
         return correcto;
     }
+
+    public ArrayList<EstReg> filtrarEstReg(String str){
+        DbHelper dbHelper = new DbHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ArrayList<EstReg> listaEstRegs = new ArrayList<>();
+        EstReg estRegs;
+        Cursor cursorEstRegs;
+
+        cursorEstRegs = db.rawQuery("SELECT * FROM " + TABLE_ESTREG + " WHERE EstRegNom LIKE  '%" + str + "%'", null);
+
+        if(cursorEstRegs.moveToFirst()){
+            do{
+                estRegs = new EstReg();
+                estRegs.setCodigo(cursorEstRegs.getString(0));
+                estRegs.setNombre(cursorEstRegs.getString(1));
+                estRegs.setEstado_registro(cursorEstRegs.getString(2));
+                listaEstRegs.add(estRegs);
+            } while (cursorEstRegs.moveToNext());
+        }
+
+        cursorEstRegs.close();
+        return listaEstRegs;
+    }
+
+    public boolean operationEstReg(String codigo, String estReg){
+
+        boolean correcto;
+
+        DbHelper dbHelper = new DbHelper(context);
+
+        try (SQLiteDatabase db = dbHelper.getWritableDatabase()) {
+            db.execSQL("UPDATE "+ TABLE_ESTREG +" SET EstRegEstReg = '" + estReg + "' WHERE EstRegCod = '" + codigo+ "'");
+            correcto = true;
+        } catch (Exception e) {
+            System.out.print("Error: " + e);
+            correcto = false;
+        }
+        return correcto;
+    }
+
 }

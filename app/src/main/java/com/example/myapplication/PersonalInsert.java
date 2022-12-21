@@ -68,7 +68,12 @@ public class PersonalInsert extends AppCompatActivity {
         btnGuardar.setOnClickListener(view -> {
             DbPersonal dbPersonal = new DbPersonal(PersonalInsert.this);
             long id;
-            id = dbPersonal.insertarPersonal(txtNombre.getText().toString(), Integer.parseInt(String.valueOf(txtDni.getText())), txtFecNac.getText().toString(), Integer.parseInt(txtCargo.getText().toString()), Integer.parseInt(txtPais.getText().toString()), txtEstReg.getText().toString());
+            id = dbPersonal.insertarPersonal(txtNombre.getText().toString(),
+                                            Integer.parseInt(String.valueOf(txtDni.getText())),
+                                            txtFecNac.getText().toString(),
+                                            Integer.parseInt(txtCargo.getText().toString()),
+                                            Integer.parseInt(txtPais.getText().toString()),
+                                            txtEstReg.getText().toString());
             if (id > 0){
                 Toast.makeText(PersonalInsert.this, "Registro Guardado", Toast.LENGTH_LONG).show();
                 limpiar();
