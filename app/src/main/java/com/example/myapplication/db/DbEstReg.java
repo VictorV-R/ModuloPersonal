@@ -134,7 +134,7 @@ public class DbEstReg extends DbHelper{
         EstReg estRegs;
         Cursor cursorEstRegs;
 
-        cursorEstRegs = db.rawQuery("SELECT * FROM " + TABLE_ESTREG + " WHERE EstRegNom LIKE  '%" + str + "%'", null);
+        cursorEstRegs = db.rawQuery("SELECT * FROM " + TABLE_ESTREG + " WHERE EstRegNom LIKE  '%" + str + "%' AND EstRegEstReg NOT LIKE '%*%'", null);
 
         if(cursorEstRegs.moveToFirst()){
             do{

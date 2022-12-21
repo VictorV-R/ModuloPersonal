@@ -107,7 +107,7 @@ public class DbPais extends DbHelper {
         Pais pais;
         Cursor cursorPais;
 
-        cursorPais = db.rawQuery("SELECT * FROM " + TABLE_PAISES + " WHERE PaiNom LIKE  '%" + str + "%'", null);
+        cursorPais = db.rawQuery("SELECT * FROM " + TABLE_PAISES + " WHERE PaiNom LIKE  '%" + str + "%' AND PaiEstReg NOT LIKE '%*%'", null);
 
         if(cursorPais.moveToFirst()){
             do{

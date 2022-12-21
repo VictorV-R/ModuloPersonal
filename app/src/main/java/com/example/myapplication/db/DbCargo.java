@@ -109,7 +109,7 @@ public class DbCargo extends DbHelper{
         Cargo cargo;
         Cursor cursorCargo;
 
-        cursorCargo = db.rawQuery("SELECT * FROM " + TABLE_CARGO + " WHERE CarNom LIKE  '%" + str + "%'", null);
+        cursorCargo = db.rawQuery("SELECT * FROM " + TABLE_CARGO + " WHERE CarNom LIKE  '%" + str + "%' AND CarEstReg NOT LIKE '%*%'", null);
 
         if(cursorCargo.moveToFirst()){
             do{

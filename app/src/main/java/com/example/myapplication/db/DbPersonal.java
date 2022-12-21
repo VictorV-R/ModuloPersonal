@@ -155,7 +155,7 @@ public class DbPersonal extends DbHelper{
         Personal personal;
         Cursor cursorPersonal;
 
-        cursorPersonal = db.rawQuery("SELECT * FROM " + TABLE_PERSONAL + " WHERE PerNom LIKE  '%" + str + "%'", null);
+        cursorPersonal = db.rawQuery("SELECT * FROM " + TABLE_PERSONAL + " WHERE PerNom LIKE  '%" + str + "%' AND PerEstReg NOT LIKE '%*%'", null);
 
         if(cursorPersonal.moveToFirst()){
             do{
