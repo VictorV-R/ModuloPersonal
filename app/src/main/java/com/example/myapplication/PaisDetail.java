@@ -66,6 +66,12 @@ public class PaisDetail extends AppCompatActivity {
             txtEstRegPais.setInputType(InputType.TYPE_NULL);
         }
 
+        if(pais.getEstReg().equals("I")){
+            bloquearBotones(false);
+        }else {
+            bloquearBotones(true);
+        }
+
         btnEditar.setOnClickListener(view -> {
             Intent intent = new Intent(PaisDetail.this, PaisEditar.class);
             intent.putExtra("ID", codigo);
@@ -125,6 +131,12 @@ public class PaisDetail extends AppCompatActivity {
     public void loadActivityPais(){
         Intent intent = new Intent(this, PaisLista.class);
         startActivity(intent);
+    }
+
+    public void bloquearBotones(Boolean flag){
+        btnEditar.setEnabled(flag);
+        btnEliminar.setEnabled(flag);
+
     }
 
 }

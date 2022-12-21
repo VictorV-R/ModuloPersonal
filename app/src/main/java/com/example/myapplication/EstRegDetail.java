@@ -57,6 +57,12 @@ public class EstRegDetail extends AppCompatActivity {
             txtEstReg.setInputType(InputType.TYPE_NULL);
         }
 
+        if(estRegs.getEstado_registro().equals("I")){
+           bloquearBotones(false);
+        }else {
+            bloquearBotones(true);
+        }
+
         btnEditar.setOnClickListener(view -> {
             Intent intent = new Intent(EstRegDetail.this, EstRegEditar.class);
             intent.putExtra("ID", codigo);
@@ -113,5 +119,11 @@ public class EstRegDetail extends AppCompatActivity {
     public void loadActivityEstado(){
         Intent intent = new Intent(this, EstRegLista.class);
         startActivity(intent);
+    }
+
+    public void bloquearBotones(Boolean flag){
+        btnEditar.setEnabled(flag);
+        btnEliminar.setEnabled(flag);
+
     }
 }

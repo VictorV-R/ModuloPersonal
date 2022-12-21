@@ -66,6 +66,12 @@ public class CargoDetail extends AppCompatActivity {
             txtEstRegCargo.setInputType(InputType.TYPE_NULL);
         }
 
+        if(cargo.getEstReg().equals("I")){
+            bloquearBotones(false);
+        }else {
+            bloquearBotones(true);
+        }
+
         btnEditar.setOnClickListener(view -> {
             Intent intent = new Intent(CargoDetail.this, CargoEditar.class);
             intent.putExtra("ID", codigo);
@@ -123,5 +129,11 @@ public class CargoDetail extends AppCompatActivity {
     public void loadActivityCargo(){
         Intent intent = new Intent(this, CargoLista.class);
         startActivity(intent);
+    }
+
+    public void bloquearBotones(Boolean flag){
+        btnEditar.setEnabled(flag);
+        btnEliminar.setEnabled(flag);
+
     }
 }

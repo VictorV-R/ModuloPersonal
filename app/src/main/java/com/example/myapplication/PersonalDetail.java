@@ -68,6 +68,12 @@ public class PersonalDetail extends AppCompatActivity {
             txtEstRegPersonal.setInputType(InputType.TYPE_NULL);
         }
 
+        if(personal.getPerEstReg().equals("I")){
+            bloquearBotones(false);
+        }else {
+            bloquearBotones(true);
+        }
+
         btnEditar.setOnClickListener(view -> {
             Intent intent = new Intent(PersonalDetail.this, PersonalEditar.class);
             intent.putExtra("ID", codigo);
@@ -126,6 +132,12 @@ public class PersonalDetail extends AppCompatActivity {
     public void loadActivityPersonal(){
         Intent intent = new Intent(this, PersonalLista.class);
         startActivity(intent);
+    }
+
+    public void bloquearBotones(Boolean flag){
+        btnEditar.setEnabled(flag);
+        btnEliminar.setEnabled(flag);
+
     }
 
 }
